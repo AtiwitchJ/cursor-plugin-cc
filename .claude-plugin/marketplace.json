@@ -1,0 +1,17 @@
+{
+  "name": "agents-plugin-cc-cursor",
+  "owner": { "name": "agents-plugin-cc" },
+  "metadata": {
+    "description": "Claude Code plugin for delegating work to Cursor agent.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "cursor",
+      "description": "Use Cursor agent from Claude Code to review code or delegate tasks.",
+      "version": "0.1.0",
+      "author": { "name": "agents-plugin-cc" },
+      "source": "./plugins/cursor"
+    }
+  ]
+}
