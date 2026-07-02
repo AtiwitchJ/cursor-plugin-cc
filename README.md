@@ -3,7 +3,7 @@
 This plugin is for Claude Code users who want to delegate code reviews or tasks to the
 Cursor agent CLI (`agent`).
 
-## What You Get (once implemented)
+## What You Get
 
 - `/cursor:review` for a normal read-only review
 - `/cursor:adversarial-review` for a steerable challenge review
@@ -16,33 +16,32 @@ Cursor agent CLI (`agent`).
 - Authentication: run `!agent login`
 - **Node.js 18.18 or later**
 
-## Installing the scaffold
+## Install in Claude Code
 
 ```bash
 /plugin marketplace add <your-org>/cursor-plugin-cc
 /plugin install cursor@agents-plugin-cc-cursor
 ```
 
-The scaffold ships with stub commands that will fail with a "not implemented" error
-until you wire up `plugins/cursor/scripts/lib/cursor.mjs` and
-`plugins/cursor/scripts/cursor-companion.mjs`.
+## Install in Codex
 
-## Implementing the plugin
+```bash
+codex plugin marketplace add ./.agents/plugins/marketplace.json
+codex plugin add cursor@agents-plugin-cc-cursor
+```
 
-1. Open `plugins/cursor/scripts/lib/cursor.mjs` and replace the stub functions with real
-   implementations that:
-   - detect `agent` availability (`binaryAvailable` is already imported)
-   - probe authentication (`getCursorAuthStatus`)
-   - invoke the CLI in the foreground and capture its output (`runCursor`)
-   - discover a resumable session if available (`findLatestResumableSession`)
-2. Open `plugins/cursor/scripts/cursor-companion.mjs` and copy the body of
-   `../kilo-plugin-cc/plugins/kilo/scripts/kilo-companion.mjs`, renaming the imports from
-   `./lib/kilo.mjs` to `./lib/cursor.mjs` and the `runKilo` calls to your new wrapper.
-3. Add tests under `tests/` that cover argument parsing, state, and the new wrapper.
+Start a new Codex thread after installing or updating the plugin. Codex-facing skills live
+under `plugins/cursor/skills/` and call `plugins/cursor/scripts/cursor-companion.mjs`.
+
+## Runtime
+
+The companion invokes the local Cursor Agent CLI with `agent -p <prompt>`. `/cursor:setup`
+or `node plugins/cursor/scripts/cursor-companion.mjs setup --json` reports missing
+CLI/authentication steps without returning a placeholder error.
 
 ## Reference
 
-See `../kilo-plugin-cc/` for a complete working example.
+See `../kilo-plugin-cc/` for the reference implementation this runtime follows.
 
 ## License
 
