@@ -1,6 +1,6 @@
-# Cursor agent plugin for Claude Code
+# Cursor agent plugin for Claude Code and Codex
 
-This plugin is for Claude Code users who want to delegate code reviews or tasks to the
+This plugin is for Claude Code and Codex users who want to delegate code reviews or tasks to the
 Cursor agent CLI (`agent`).
 
 ## What You Get
